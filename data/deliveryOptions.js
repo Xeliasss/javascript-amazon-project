@@ -13,7 +13,7 @@ export const deliveryOptions = [{
 }];
 
 
-function getDeliveryOption(deliveryOptionId) {
+export function getDeliveryOption(deliveryOptionId) {
 
     let deliveryOptions
 
