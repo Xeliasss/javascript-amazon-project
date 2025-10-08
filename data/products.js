@@ -1,5 +1,6 @@
 export function getProduct(productId) {
-   let matchingProduct;
+   
+  let matchingProduct;
 
     products.forEach((product) => {
 
@@ -7,6 +8,8 @@ export function getProduct(productId) {
             matchingProduct = product;
         }
     });
+
+    return matchingProduct;
 }
 
 

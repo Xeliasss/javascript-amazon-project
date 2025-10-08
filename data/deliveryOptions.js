@@ -13,13 +13,14 @@ export const deliveryOptions = [{
 }];
 
 
-export function getDeliveryOption(deliveryOptionId) {
+export function getDeliveryOption
+(deliveryOptionId) {
 
-    let deliveryOptions
+    let deliveryOption;
 
     deliveryOptions.forEach((option) => {
         if (option.id === deliveryOptionId) {
-            deliveryOptions = option;
+            deliveryOption = option;
         }
     })
     return deliveryOption || deliveryOptions[0];
