@@ -1,17 +1,17 @@
  class Car {
- brand;
- model;
+ #brand;
+ #model;
  speed = 0;
  isTrunkOpen = false;
 
 
    constructor(carDetails) {
-    this.brand = carDetails.brand;
-    this.model = carDetails.model;
+    this.#brand = carDetails.brand;
+    this.#model = carDetails.model;
  }
 
  displayInfo() {
-    console.log( `Car Brand: ${this.brand}, Model: ${this.model}, Speed: ${this.speed} km/h`, `Trunk Open: ${this.isTrunkOpen}` );
+    console.log( `Car Brand: ${this.#brand}, Model: ${this.#model}, Speed: ${this.speed} km/h`, `Trunk Open: ${this.isTrunkOpen}` );
  }
 
  go() {
@@ -67,16 +67,38 @@ const   car2 = new Car({
 
   class RaceCar extends Car {
     acceleration;
-    isTrunkOpen = "";
+  
+   constructor(carDetails) {
+    super(carDetails);
+    this.acceleration = carDetails.acceleration;
+  }
+
+
 
     go() {
-        this.acceleration += 5;
+        this.speed += this.acceleration;
 
         if(this.speed < 300) {
             this.speed = 300;
         }
     }
+
+
+
+  openTrunk() {
+    console.log('Race cars do not have a trunk.');
+  }
+
+  closeTrunk() {
+    console.log('Race cars do not have a trunk.');
+  }
+
+
     }
+
+const raceCar1 = new RaceCar({
+    brand: "McLaren", model: "F1", acceleration: 20
+});
 
 
 
@@ -85,6 +107,7 @@ const   car2 = new Car({
 
 console.log(car1);
 console.log(car2); 
+console.log(raceCar1);
 
 car1.displayInfo();
 car2.displayInfo();
@@ -93,4 +116,13 @@ car1.go();
 car1.displayInfo();
 car1.go();
 car1.displayInfo();
-console.log(car1);
+
+
+raceCar1.go();
+raceCar1.go();
+raceCar1.go();
+raceCar1.displayInfo();
+raceCar1.openTrunk();
+raceCar1.displayInfo();
+raceCar1.brake();
+raceCar1.displayInfo();
