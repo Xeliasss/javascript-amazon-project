@@ -10,14 +10,24 @@ import '../data/car.js';
 
 async function loadPage() {
   
-    await loadProductsFetch();
+    try{
+      //throw 'test error';
+
+      await loadProductsFetch();
 
 
-    const value = await new Promise((resolve) => {
+    const value = await new Promise((resolve, reject) => {
+     //throw 'test error';
     loadCart(() => {
+    // reject('test error');
       resolve();
    });
   });
+
+} catch(error){
+    console.log('Unexpected error.Please try again later.');
+}
+
 
 
     renderOrderSummary();
