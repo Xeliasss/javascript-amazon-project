@@ -31,7 +31,7 @@ jobs:
 
   gitleaks-scan:
     runs-on: Xelias
-    needs: compile     # optional: erst nach erfolgreichem Build
+ 
 
     steps:
       - name: Checkout code 
@@ -45,7 +45,7 @@ jobs:
 
   trivy_fs_scan:
     runs-on: Xelias
-    needs: gitleaks-scan
+    
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
