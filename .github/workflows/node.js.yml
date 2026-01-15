@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  compile:
     runs-on: Xelias
 
     steps:
@@ -31,7 +31,7 @@ jobs:
 
   gitleaks-scan:
     runs-on: Xelias
-    needs: build     # optional: erst nach erfolgreichem Build
+    needs: compile     # optional: erst nach erfolgreichem Build
 
     steps:
       - name: Checkout code 
@@ -41,3 +41,23 @@ jobs:
         run: |
           gitleaks detect --source ./client --exit-code 1
           gitleaks detect --source ./api --exit-code 1
+
+
+  trivy_fs_scan:
+    runs-on: Xelias
+    needs: gitleaks-scan
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+          
+      - name: Run Trivy vulnerability scanner in fs mode
+        uses: aquasecurity/trivy-action@0.33.1
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          format: 'table'
+          ignore-unfixed: true
+          vuln-type:: 'os,library'
+          severity: 'CRITICAL,HIGH'
+          
+      
